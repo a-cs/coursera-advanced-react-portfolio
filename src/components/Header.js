@@ -64,6 +64,7 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
+			{/* Add social media links based on the `socials` data */}
             <HStack spacing={8}>
             {
               socials.map(item => {
