@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -33,6 +33,8 @@ const socials = [
 ];
 
 const Header = () => {
+  const [y, setY] = useState(window.scrollY)
+  
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
@@ -43,6 +45,22 @@ const Header = () => {
       });
     }
   };
+
+  const ref = useRef(null)
+
+  const handleScroll = () => {
+	const currentScrollPosition = window.scrollY
+	if (y - currentScrollPosition < 0)
+		ref.current.style.transform = "translateY(-200px)"
+	else if (y - currentScrollPosition > 0) 
+		ref.current.style.transform = "translateY(0)"
+	setY(currentScrollPosition);
+  };
+
+  useEffect(() => {
+	window.addEventListener('scroll',handleScroll)
+	return () => {window.removeEventListener('scroll', handleScroll)}
+  },[y])
 
   return (
     <Box
@@ -55,6 +73,7 @@ const Header = () => {
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
+	  ref={ref}
     >
       <Box color="white" maxWidth="1280px" margin="0 auto">
         <HStack
@@ -69,7 +88,7 @@ const Header = () => {
             {
               socials.map(item => {
                 return (
-                  <a key={item.url} href={item.url}><FontAwesomeIcon icon={item.icon} size="2x" /></a>
+                  <a key={item.url} target="_blank" href={item.url}><FontAwesomeIcon icon={item.icon} size="2x" /></a>
                 )
               })
             }

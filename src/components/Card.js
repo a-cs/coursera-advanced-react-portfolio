@@ -17,7 +17,7 @@ const Card = ({ title, description, imageSrc }) => {
 			alt='Dan Abramov'
 		/>
 		<VStack align="start" spacing="12px" px="16px" pb="16px">
-			<Heading as='h5' size='sm' noOfLines={1}>{title}</Heading>
+			<Heading as='h4' size='md' noOfLines={1}>{title}</Heading>
 			<Text>{description}</Text>
 			<Heading as='h6' size='xs' noOfLines={1}>See more <FontAwesomeIcon icon={faArrowRight} size="1x" /></Heading>
 		</VStack>

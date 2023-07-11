@@ -31,9 +31,9 @@ const LandingSection = () => {
     onSubmit: async (values) => await submit("url", values),
 	validationSchema: Yup.object({
 		firstName:  Yup.string().required("Required"),
-		email:  Yup.string().email("Invalid email").required("Required"),
+		email:  Yup.string().email("Invalid email address").required("Required"),
 		type:  Yup.string().required("Required"),
-		comment:  Yup.string().required("Required"),
+		comment:  Yup.string().required("Required").min(25, "Must be at least 25 characters"),
 	}),
 	});
 	
